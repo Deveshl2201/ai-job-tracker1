@@ -13,6 +13,7 @@
     "@langchain/langgraph": "^0.2.18",
     "@langchain/openai": "^0.3.0",
     "dotenv": "^16.4.5",
-    "fastify": "^5.7.4"
+    "fastify": "^5.7.4",
+    "nanoid": "^5.0.7"
   }
 }
