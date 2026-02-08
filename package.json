@@ -1,0 +1,13 @@
+{
+  "name": "ai-job-tracker",
+  "private": true,
+  "workspaces": [
+    "apps/frontend",
+    "apps/backend"
+  ],
+  "scripts": {
+    "dev:backend": "npm --workspace apps/backend run dev",
+    "dev:frontend": "npm --workspace apps/frontend run dev",
+    "dev": "npm --workspace apps/backend run dev"
+  }
+}
