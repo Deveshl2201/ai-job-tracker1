@@ -120,21 +120,21 @@ The assistant expands on demand and stays accessible without disrupting reading 
 - Backend URL: https://ai-job-tracker1.onrender.com
 - Public GitHub repo: TODO (add your repo link)
 
-## Deployment (Vercel + Render)
-### Backend (Render)
-1. Create a new **Web Service** from this repo.
+## Deployment (Vercel + Railway)
+### Backend (Railway)
+1. Create a new project from this repo.
 2. Set **Root Directory** to `apps/backend`.
-3. Build command: `npm install`
-4. Start command: `npm run start`
+3. Build command: `npm install` (or leave blank).
+4. Start command: `npm run start`.
 5. Add env vars: `OPENAI_API_KEY`, `OPENAI_MODEL`, `ADZUNA_APP_ID`, `ADZUNA_APP_KEY`, `ADZUNA_COUNTRY`.
-6. Deploy and copy the Render URL.
+6. Deploy and copy the Railway public URL.
 
 ### Frontend (Vercel)
 1. Import this repo into Vercel.
 2. Set **Install Command** to `npm install`.
 3. Set **Build Command** to `npm --workspace apps/frontend run build`.
 4. Set **Output Directory** to `apps/frontend/dist`.
-5. Set env var `VITE_API_BASE` to your Render backend URL.
+5. Set env var `VITE_API_BASE` to your Railway backend URL.
 6. Update `vercel.json` and replace `YOUR_RENDER_BACKEND_URL` with your backend URL.
 7. Deploy.
 
