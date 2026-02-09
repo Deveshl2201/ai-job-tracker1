@@ -19,24 +19,33 @@ export async function scoreJob(resumeText, job) {
     };
   }
 
-  const response = await model.invoke([
-    { role: "system", content: systemPrompt },
-    {
-      role: "user",
-      content: `Resume:\n${resumeText}\n\nJob:\nTitle: ${job.title}\nDescription: ${job.description}\nSkills: ${(job.skills || []).join(", ")}`
-    }
-  ]);
+  try {
+    const response = await model.invoke([
+      { role: "system", content: systemPrompt },
+      {
+        role: "user",
+        content: `Resume:\n${resumeText}\n\nJob:\nTitle: ${job.title}\nDescription: ${job.description}\nSkills: ${(job.skills || []).join(", ")}`
+      }
+    ]);
 
-  const parsed = safeJsonParse(response.content, {
-    matchScore: 0,
-    matchedSkills: [],
-    relevantExperience: "No summary",
-    keywordAlignment: "No alignment"
-  });
-  return {
-    matchScore: Math.max(0, Math.min(100, Number(parsed.matchScore) || 0)),
-    matchedSkills: Array.isArray(parsed.matchedSkills) ? parsed.matchedSkills : [],
-    relevantExperience: parsed.relevantExperience || "No summary",
-    keywordAlignment: parsed.keywordAlignment || "No alignment"
-  };
+    const parsed = safeJsonParse(response.content, {
+      matchScore: 0,
+      matchedSkills: [],
+      relevantExperience: "No summary",
+      keywordAlignment: "No alignment"
+    });
+    return {
+      matchScore: Math.max(0, Math.min(100, Number(parsed.matchScore) || 0)),
+      matchedSkills: Array.isArray(parsed.matchedSkills) ? parsed.matchedSkills : [],
+      relevantExperience: parsed.relevantExperience || "No summary",
+      keywordAlignment: parsed.keywordAlignment || "No alignment"
+    };
+  } catch (error) {
+    return {
+      matchScore: 0,
+      matchedSkills: [],
+      relevantExperience: "AI unavailable",
+      keywordAlignment: "OpenAI quota or network error"
+    };
+  }
 }
